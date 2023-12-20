@@ -11,7 +11,23 @@ export class GameManager {
     constructor() {
     }
     start(): void {
+        //show game company title
+        const gameCompanyTitleContainer = document.getElementById('game-company-title-container');
+        gameCompanyTitleContainer?.style.setProperty('display', 'flex');
+        setTimeout(() => {
+            gameCompanyTitleContainer?.style.setProperty('display', 'none');
 
+            //show game title
+            const gameTitleScreen = document.getElementById('game-title-screen');
+            gameTitleScreen?.style.setProperty('display', 'flex');
+            setTimeout(() => {
+                gameTitleScreen?.style.setProperty('display', 'none');
+
+                //show main menu screen
+                const mainMenuScreen = document.getElementById('main-menu-screen');
+                mainMenuScreen?.style.setProperty('display', 'block');
+            }, 3000);
+        }, 3000);
     }
 
     play(): void {

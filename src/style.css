@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+#game-company-title-container {
+    display: none;
+    min-height: 100vh;
+    min-width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: display ease-in-out 1s;
+}
+#game-company-title-container .brand-logo {
+    width: 18%;
+    margin-bottom: .8rem;
+}
+#game-company-title-container .brand-name {
+    width: 70%;
+} 
+
+#game-title-screen {
+    display: none;
+    min-height: 100vh;
+    min-width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #182c3b;
+    transition: display ease-in-out 1s;
+}
+
+#game-title-screen .brand-logo {
+    width: 40px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
