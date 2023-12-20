@@ -1,24 +1,29 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { GameManager } from './classes/GameManager';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const playBtn = document.getElementById('play-btn');
+const soundBtn = document.getElementById('sound-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const scoreboardBtn = document.getElementById('scoreboard-btn')
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+
+const gameManager: GameManager = new GameManager();
+
+gameManager.start();
+
+playBtn?.addEventListener('click', () => {
+  gameManager.play();
+});
+
+soundBtn?.addEventListener('click', () => {
+  gameManager.toggleSound();
+})
+
+pauseBtn?.addEventListener('click', () => {
+  gameManager.pauseGame();
+})
+
+scoreboardBtn?.addEventListener('click', () => {
+  gameManager.showScoreBoard();
+})
+
+
