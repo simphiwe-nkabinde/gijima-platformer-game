@@ -1,14 +1,39 @@
+import ground from "../gameObjects/collisionBlocks/ground";
 import { CollisionBlock } from "./CollisionBlock";
 import { Player } from "./Player";
 import { Token } from "./Token";
 
 export class GameManager {
 
-    private player?: Player;
-    private collisionBlocks?: [CollisionBlock];
+    private player: Player;
+    private collisionBlocks: [CollisionBlock];
     private tokens?: [Token];
+    private context: CanvasRenderingContext2D;
+    private CONTROLS = {
+        JUMP: {
+            pressed: false
+        },
+        RIGHT: {
+            pressed: false
+        },
+        LEFT: {
+            pressed: false
+        }
+    }
 
     constructor() {
+        this.player = new Player({
+            position: { x: 400, y: 30 },
+            width: 50,
+            height: 50,
+            imageSrc: ""
+        });
+        const canvas = document.querySelector('canvas')!;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        this.context = canvas!.getContext('2d')!;
+
+        this.collisionBlocks =  [ground];
     }
     start(): void {
         //show game company title
@@ -31,7 +56,62 @@ export class GameManager {
     }
 
     play(): void {
+        const canvas = document.querySelector('canvas')!;
+        canvas.style.setProperty('display', 'block');
+        this.animate();
+        this.setupControls();
+        //hide main menu screen
+        const mainMenuScreen = document.getElementById('main-menu-screen');
+        mainMenuScreen?.style.setProperty('display', 'none');
+    }
 
+    setupControls() {
+        window.addEventListener('keydown', event => {
+            switch (event.key) {
+                case 'ArrowUp':
+                    this.CONTROLS.JUMP.pressed = true
+                    break;
+                case 'ArrowRight':
+                    this.CONTROLS.RIGHT.pressed = true
+                    break;
+                case 'ArrowLeft':
+                    this.CONTROLS.LEFT.pressed = true
+                    break;
+                default:
+                    break;
+            }
+        })
+        window.addEventListener('keyup', event => {
+            switch (event.key) {
+                case 'ArrowUp':
+                    this.CONTROLS.JUMP.pressed = false
+                    break;
+                case 'ArrowRight':
+                    this.CONTROLS.RIGHT.pressed = false
+                    break;
+                case 'ArrowLeft':
+                    this.CONTROLS.LEFT.pressed = false
+                    break;
+                default:
+                    break;
+            }
+        })
+    }
+
+    animate = () => {
+        window.requestAnimationFrame(this.animate);
+        this.context.fillStyle = ""
+        this.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+        this.collisionBlocks.forEach(block => {
+            block.draw(this.context)
+        });
+        this.player.draw(this.context);
+        if (this.CONTROLS.JUMP.pressed) this.player.jump();
+        if (this.CONTROLS.LEFT.pressed) this.player.moveBackward()
+        else this.player.stop
+        if (this.CONTROLS.RIGHT.pressed) this.player.moveForward()
+        else this.player.stop
     }
 
     showScoreBoard(): void {
@@ -49,20 +129,4 @@ export class GameManager {
     showPauseMenu(): void {
 
     }
-
-    setCollisionBlocks(blocks: [CollisionBlock]): void {
-        this.collisionBlocks = blocks;
-    }
-
-    setPlayer(player: Player): void {
-        this.player = player;
-    }
-
-    setTokens(tokens: [Token]): void {
-        this.tokens = tokens;
-    }
-
-
-
-
 }

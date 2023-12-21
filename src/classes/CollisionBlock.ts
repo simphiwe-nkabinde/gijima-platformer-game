@@ -6,7 +6,8 @@ export class CollisionBlock extends Interactable {
         super(options)
     }
     
-    draw(): void {
-        
+    draw(context: CanvasRenderingContext2D): void {
+        context.fillStyle = 'blue';
+        context.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 }

@@ -46,7 +46,7 @@ body {
     }
 }
 
-#main-menu-screen {
+#main-menu-screen, canvas {
     display: none;
     background-image: url('/plx-4.png'), url('/plx-3.png'), url('/plx-2.png'), url('/plx-1.png');
     background-size: cover;

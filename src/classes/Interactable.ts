@@ -13,5 +13,5 @@ export abstract class Interactable {
         this.imageSrc = options.imageSrc;
     }
 
-    abstract draw(): void
+    abstract draw(context: CanvasRenderingContext2D): void
 }
