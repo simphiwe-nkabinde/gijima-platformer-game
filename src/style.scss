@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#game-company-title-container {
+    display: none;
+    min-height: 100vh;
+    min-width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: display ease-in-out 1s;
+
+    .brand-logo {
+        width: 18%;
+        margin-bottom: .8rem;
+    }
+
+    .brand-name {
+        width: 70%;
+    }
+}
+
+#game-title-screen {
+    display: none;
+    min-height: 100vh;
+    min-width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #182c3b;
+    transition: display ease-in-out 1s;
+
+    .brand-logo {
+        width: 40px;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+#main-menu-screen {
+    display: none;
+    background-image: url('/plx-4.png'), url('/plx-3.png'), url('/plx-2.png'), url('/plx-1.png');
+    background-size: cover;
+    min-height: 100vh;
+    min-width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+
+    .ground {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+    }
+
+    .character {
+        position: absolute;
+        bottom: 45px;
+        left: 20%;
+        width: 40px;
+    }
+
+    .game-title {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        width: 400px;
+    }
+
+    .menu-wrapper {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        right: 80px;
+        top: 50px;
+
+        button {
+            color: white;
+            border: 2px solid #539047;
+            border-radius: 5px;
+            padding: 5px 40px;
+            background: #204042;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        button:focus {
+            background: #192b3bf3;
+            box-shadow: 0px 0px 4px 3px #0000002e;
+        }
+    }
+}

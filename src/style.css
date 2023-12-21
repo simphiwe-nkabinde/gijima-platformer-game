@@ -1,44 +1,92 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
+
 #game-company-title-container {
-    display: none;
-    min-height: 100vh;
-    min-width: 100vw;
-    max-height: 100vh;
-    max-width: 100vw;
-    /* display: flex; */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: display ease-in-out 1s;
+  display: none;
+  min-height: 100vh;
+  min-width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: display ease-in-out 1s;
 }
 #game-company-title-container .brand-logo {
-    width: 18%;
-    margin-bottom: .8rem;
+  width: 18%;
+  margin-bottom: 0.8rem;
 }
 #game-company-title-container .brand-name {
-    width: 70%;
-} 
+  width: 70%;
+}
 
 #game-title-screen {
-    display: none;
-    min-height: 100vh;
-    min-width: 100vw;
-    max-height: 100vh;
-    max-width: 100vw;
-    /* display: flex; */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #182c3b;
-    transition: display ease-in-out 1s;
+  display: none;
+  min-height: 100vh;
+  min-width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #182c3b;
+  transition: display ease-in-out 1s;
+}
+#game-title-screen .brand-logo {
+  width: 40px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
-#game-title-screen .brand-logo {
-    width: 40px;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+#main-menu-screen {
+  display: none;
+  background-image: url("/plx-4.png"), url("/plx-3.png"), url("/plx-2.png"), url("/plx-1.png");
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
 }
+#main-menu-screen .ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+}
+#main-menu-screen .character {
+  position: absolute;
+  bottom: 45px;
+  left: 20%;
+  width: 40px;
+}
+#main-menu-screen .game-title {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 400px;
+}
+#main-menu-screen .menu-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 80px;
+  top: 50px;
+}
+#main-menu-screen .menu-wrapper button {
+  color: white;
+  border: 2px solid #539047;
+  border-radius: 5px;
+  padding: 5px 40px;
+  background: #204042;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+#main-menu-screen .menu-wrapper button:focus {
+  background: rgba(25, 43, 59, 0.9529411765);
+  box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.1803921569);
+}/*# sourceMappingURL=style.css.map */
