@@ -16,22 +16,34 @@ export class Player extends Interactable {
     draw(context: CanvasRenderingContext2D): void {
         context.fillStyle = 'red';
         context.fillRect(this.position.x, this.position.y, this.width, this.height);
-        this.position.y += this.velocity.y;
-        this.velocity.y += this.gravity;
+        this.addGravity();
+    }
+
+    addGravity() {
+        if (this.position.y <= (window.innerHeight - 100)) {
+            this.position.y += this.velocity.y;
+            this.velocity.y += this.gravity;
+        }
+
+    }
+    moveHorizontally() {
+        this.position.x += this.velocity.x;
     }
 
     jump(): void {
-
+        this.velocity.y = -15;
     }
 
     stop(): void {
 
     }
     moveForward(): void {
-
+        this.velocity.x = 5;
+        this.moveHorizontally();
     }
     moveBackward(): void {
-
+        this.velocity.x = -5;
+        this.moveHorizontally();
     }
     takeDamage(amount: number): void {
 

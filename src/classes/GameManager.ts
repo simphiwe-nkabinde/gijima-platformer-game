@@ -1,6 +1,7 @@
 import ground from "../gameObjects/collisionBlocks/ground";
 import { CollisionBlock } from "./CollisionBlock";
 import { Player } from "./Player";
+import { Sprite } from "./Sprite";
 import { Token } from "./Token";
 
 export class GameManager {
@@ -9,6 +10,7 @@ export class GameManager {
     private collisionBlocks: [CollisionBlock];
     private tokens?: [Token];
     private context: CanvasRenderingContext2D;
+    private background: Sprite
     private CONTROLS = {
         JUMP: {
             pressed: false
@@ -28,12 +30,18 @@ export class GameManager {
             height: 50,
             imageSrc: ""
         });
+        this.background = new Sprite({
+            position: { x: 0, y: 0 },
+            imageSrc: "/background-sprite.png",
+            width: window.innerHeight * 16 / 9 * 3,
+            height: window.innerHeight
+        })
         const canvas = document.querySelector('canvas')!;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         this.context = canvas!.getContext('2d')!;
 
-        this.collisionBlocks =  [ground];
+        this.collisionBlocks = [ground];
     }
     start(): void {
         //show game company title
@@ -103,15 +111,26 @@ export class GameManager {
         this.context.fillStyle = ""
         this.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
+        //background sprite
+        this.context.save();
+        this.context.translate(0, 0);
+        this.background.draw(this.context);
+        this.context.restore();
+
+        //collisions
         this.collisionBlocks.forEach(block => {
             block.draw(this.context)
         });
+
+        //player
         this.player.draw(this.context);
+
+        //controls
         if (this.CONTROLS.JUMP.pressed) this.player.jump();
         if (this.CONTROLS.LEFT.pressed) this.player.moveBackward()
-        else this.player.stop
+        else this.player.stop()
         if (this.CONTROLS.RIGHT.pressed) this.player.moveForward()
-        else this.player.stop
+        else this.player.stop()
     }
 
     showScoreBoard(): void {
