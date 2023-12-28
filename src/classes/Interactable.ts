@@ -1,18 +1,18 @@
 import { InteractableProps } from '../interfaces/interfaces';
+import { Sprite } from './Sprite';
+
 export abstract class Interactable {
     protected position: any;
     protected width: number;
     protected height: number;
-    protected image: HTMLImageElement;
-
+    protected sprite?: Sprite;
 
     constructor(props: InteractableProps) {
         this.position = props.position;
         this.width = props.width;
         this.height = props.height;
-        this.image = new Image();
-        this.image.src = props.imageSrc;
+        this.sprite = new Sprite(props)
     }
 
-    abstract draw(context: CanvasRenderingContext2D): void
+    abstract update(context: CanvasRenderingContext2D): void
 }

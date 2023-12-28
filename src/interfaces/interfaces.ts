@@ -23,6 +23,6 @@ export interface SpriteProps {
     position: any;
     width: number;
     height: number;
-    imageSrc: string;
-    animations: [SpriteAnimationProps];
+    imageSrc?: string;
+    animations?: [SpriteAnimationProps];
 }

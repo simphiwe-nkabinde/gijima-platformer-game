@@ -7,7 +7,7 @@ import { Token } from "./Token";
 export class GameManager {
 
     private player: Player;
-    private collisionBlocks: [CollisionBlock];
+    private collisionBlocks: CollisionBlock[];
     private tokens?: [Token];
     private context: CanvasRenderingContext2D;
     private background: Sprite
@@ -28,7 +28,7 @@ export class GameManager {
             position: { x: 400, y: 30 },
             width: 50,
             height: 50,
-            imageSrc: ""
+            imageSrc: "/idle.gif"
         });
         this.background = new Sprite({
             position: { x: 0, y: 0 },
@@ -41,7 +41,7 @@ export class GameManager {
         canvas.height = window.innerHeight;
         this.context = canvas!.getContext('2d')!;
 
-        this.collisionBlocks = [ground];
+        this.collisionBlocks = ground;
     }
     start(): void {
         //show game company title
@@ -111,19 +111,17 @@ export class GameManager {
         this.context.fillStyle = ""
         this.context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-        //background sprite
         this.context.save();
+
         this.context.translate(0, 0);
         this.background.draw(this.context);
-        this.context.restore();
-
-        //collisions
         this.collisionBlocks.forEach(block => {
-            block.draw(this.context)
+            block.update(this.context)
         });
 
-        //player
-        this.player.draw(this.context);
+        this.context.restore();
+
+        this.player.update(this.context);
 
         //controls
         if (this.CONTROLS.JUMP.pressed) this.player.jump();

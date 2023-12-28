@@ -9,13 +9,12 @@ export class Player extends Interactable {
     private healthScore: number = 100;
     private readonly gravity = 0.5;
 
-    constructor(props: InteractableProps,) {
+    constructor(props: InteractableProps) {
         super(props);
     }
 
-    draw(context: CanvasRenderingContext2D): void {
-        context.fillStyle = 'red';
-        context.fillRect(this.position.x, this.position.y, this.width, this.height);
+    update(context: CanvasRenderingContext2D): void {
+        this.sprite?.draw(context);
         this.addGravity();
     }
 
