@@ -1,12 +1,12 @@
-import { InteractableOptions } from './../interfaces/utilities';
+import { InteractableProps } from '../interfaces/interfaces';
 import { Interactable } from "./Interactable";
 
 export class Token extends Interactable {
 
     private points: number;
 
-    constructor(options: InteractableOptions, points: number) {
-        super(options);
+    constructor(props: InteractableProps, points: number) {
+        super(props);
         this.points = points;
     }
 

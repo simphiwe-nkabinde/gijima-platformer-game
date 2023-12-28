@@ -1,4 +1,4 @@
-import { InteractableOptions } from './../interfaces/utilities';
+import { InteractableProps } from '../interfaces/interfaces';
 export abstract class Interactable {
     protected position: any;
     protected width: number;
@@ -6,12 +6,12 @@ export abstract class Interactable {
     protected image: HTMLImageElement;
 
 
-    constructor(options: InteractableOptions) {
-        this.position = options.position;
-        this.width = options.width;
-        this.height = options.height;
+    constructor(props: InteractableProps) {
+        this.position = props.position;
+        this.width = props.width;
+        this.height = props.height;
         this.image = new Image();
-        this.image.src = options.imageSrc;
+        this.image.src = props.imageSrc;
     }
 
     abstract draw(context: CanvasRenderingContext2D): void

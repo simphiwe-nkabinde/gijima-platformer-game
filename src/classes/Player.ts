@@ -1,4 +1,4 @@
-import { InteractableOptions, Position } from "../interfaces/utilities";
+import { InteractableProps, Position } from "../interfaces/interfaces";
 import { Interactable } from "./Interactable";
 
 export class Player extends Interactable {
@@ -9,8 +9,8 @@ export class Player extends Interactable {
     private healthScore: number = 100;
     private readonly gravity = 0.5;
 
-    constructor(options: InteractableOptions,) {
-        super(options);
+    constructor(props: InteractableProps,) {
+        super(props);
     }
 
     draw(context: CanvasRenderingContext2D): void {

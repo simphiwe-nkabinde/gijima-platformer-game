@@ -1,9 +1,9 @@
-import { InteractableOptions } from "../interfaces/utilities";
+import { InteractableProps } from "../interfaces/interfaces";
 import { Interactable } from "./Interactable";
 
 export class CollisionBlock extends Interactable {
-    constructor(options: InteractableOptions) {
-        super(options)
+    constructor(props: InteractableProps) {
+        super(props)
     }
     
     draw(context: CanvasRenderingContext2D): void {
