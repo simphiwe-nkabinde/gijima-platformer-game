@@ -54,7 +54,7 @@ export class Sprite {
     ScalePosition(originalPosition: Position): Position {
         return {
             x: originalPosition.x * this.scale,
-            y: originalPosition.x * this.scale,
+            y: originalPosition.y * this.scale,
         }
     }
 }
