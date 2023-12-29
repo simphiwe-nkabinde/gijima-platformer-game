@@ -25,7 +25,7 @@ export class GameManager {
 
     constructor() {
         this.player = new Player({
-            position: { x: 400, y: 30 },
+            position: { x: 0, y: 30 },
             dimensions: { width: 50, height: 50 },
             imageSrc: "/idle.gif"
         }, ground);
@@ -116,10 +116,8 @@ export class GameManager {
         this.collisionBlocks.forEach(block => {
             block.update(this.context)
         });
-
-        this.context.restore();
-
         this.player.update(this.context);
+        this.context.restore();
 
         //controls
         if (this.CONTROLS.JUMP.pressed) this.player.jump();

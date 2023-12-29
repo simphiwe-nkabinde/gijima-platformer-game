@@ -11,11 +11,10 @@ export class Token extends Interactable {
     }
 
     update(context: CanvasRenderingContext2D): void {
-        context.fillStyle = 'yellow';
-        context.fillRect(this.position.x, this.position.y, this.dimensions.width, this.dimensions.height);
+        this.sprite?.draw(context);
     }
 
     getPoints(): number {
-        return 0;
+        return this.points;
     }
 }
