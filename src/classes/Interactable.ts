@@ -1,16 +1,14 @@
-import { InteractableProps } from '../interfaces/interfaces';
+import { Dimensions, InteractableProps } from '../interfaces/interfaces';
 import { Sprite } from './Sprite';
 
 export abstract class Interactable {
     protected position: any;
-    protected width: number;
-    protected height: number;
+    protected dimensions: Dimensions;
     protected sprite?: Sprite;
 
     constructor(props: InteractableProps) {
         this.position = props.position;
-        this.width = props.width;
-        this.height = props.height;
+        this.dimensions = props.dimensions;
         this.sprite = new Sprite(props)
     }
 

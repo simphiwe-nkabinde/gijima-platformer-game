@@ -10,9 +10,9 @@ export class Token extends Interactable {
         this.points = points;
     }
 
-    draw(context: CanvasRenderingContext2D): void {
+    update(context: CanvasRenderingContext2D): void {
         context.fillStyle = 'yellow';
-        context.fillRect(this.position.x, this.position.y, this.width, this.height);
+        context.fillRect(this.position.x, this.position.y, this.dimensions.width, this.dimensions.height);
     }
 
     getPoints(): number {

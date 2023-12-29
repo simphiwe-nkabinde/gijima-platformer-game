@@ -10,7 +10,7 @@ export class GameManager {
     private collisionBlocks: CollisionBlock[];
     private tokens?: [Token];
     private context: CanvasRenderingContext2D;
-    private background: Sprite
+    private background: Sprite;
     private CONTROLS = {
         JUMP: {
             pressed: false
@@ -26,15 +26,13 @@ export class GameManager {
     constructor() {
         this.player = new Player({
             position: { x: 400, y: 30 },
-            width: 50,
-            height: 50,
+            dimensions: { width: 50, height: 50 },
             imageSrc: "/idle.gif"
         });
         this.background = new Sprite({
             position: { x: 0, y: 0 },
             imageSrc: "/background-sprite.png",
-            width: window.innerHeight * 16 / 9 * 3,
-            height: window.innerHeight
+            dimensions: { width: 1920, height: 360 }
         })
         const canvas = document.querySelector('canvas')!;
         canvas.width = window.innerWidth;
