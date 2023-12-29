@@ -1,4 +1,4 @@
-import { Dimensions, InteractableProps } from '../interfaces/interfaces';
+import { Dimensions, InteractableProps, Position } from '../interfaces/interfaces';
 import { Sprite } from './Sprite';
 
 export abstract class Interactable {
@@ -13,4 +13,21 @@ export abstract class Interactable {
     }
 
     abstract update(context: CanvasRenderingContext2D): void
+
+    protected isColliding(object: Interactable): boolean {
+        return (
+            this.position.y + this.dimensions.height >= object.position.y &&
+            this.position.y <= object.position.y + object.dimensions.height &&
+            this.position.x <= object.position.x + object.dimensions.width &&
+            this.position.x + this.dimensions.width >= object.position.x
+        )
+    }
+
+    getPosition(): Position {
+        return this.position
+    }
+
+    getDimensions(): Dimensions {
+        return this.dimensions;
+    }
 }

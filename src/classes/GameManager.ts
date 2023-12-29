@@ -28,7 +28,7 @@ export class GameManager {
             position: { x: 400, y: 30 },
             dimensions: { width: 50, height: 50 },
             imageSrc: "/idle.gif"
-        });
+        }, ground);
         this.background = new Sprite({
             position: { x: 0, y: 0 },
             imageSrc: "/background-sprite.png",
