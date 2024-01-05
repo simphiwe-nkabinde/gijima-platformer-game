@@ -22,11 +22,12 @@ export class GameManager {
             pressed: false
         }
     }
+    sceneTranslationX: number = 0;
 
     constructor() {
         this.player = new Player({
             position: { x: 0, y: 30 },
-            dimensions: { width: 50, height: 50 },
+            dimensions: { width: 30, height: 50 },
             imageSrc: "/idle.gif"
         }, ground);
         this.background = new Sprite({
@@ -41,6 +42,26 @@ export class GameManager {
 
         this.collisionBlocks = ground;
     }
+
+    private panHorizontally() {
+        const playerXPos = this.player.getPosition().x
+        const playerVelocity = this.player.getVelocity();
+
+        if (playerVelocity.x == 0) return;
+
+        //space between player and left side of viewbox
+        const playerXToInnerwidthDistance = window.innerWidth - playerXPos - this.sceneTranslationX;
+
+        if (playerXToInnerwidthDistance < (window.innerWidth / 2)) {
+            // to right: decrement
+            if (this.background.getScaledDimensions().width + this.sceneTranslationX > window.innerWidth)
+                this.sceneTranslationX -= playerVelocity.x;
+        } else if (playerXToInnerwidthDistance > (window.innerWidth / 2) && this.sceneTranslationX < 0) {
+            // to left: incrementx
+            this.sceneTranslationX -= playerVelocity.x;
+        }
+    }
+
     start(): void {
         //show game company title
         const gameCompanyTitleContainer = document.getElementById('game-company-title-container');
@@ -111,19 +132,19 @@ export class GameManager {
 
         this.context.save();
 
-        this.context.translate(0, 0);
+        this.context.translate(this.sceneTranslationX, 0);
         this.background.draw(this.context);
         this.collisionBlocks.forEach(block => {
             block.update(this.context)
         });
         this.player.update(this.context);
         this.context.restore();
-
+        this.panHorizontally()
         //controls
         if (this.CONTROLS.JUMP.pressed) this.player.jump();
+
         if (this.CONTROLS.LEFT.pressed) this.player.moveBackward()
-        else this.player.stop()
-        if (this.CONTROLS.RIGHT.pressed) this.player.moveForward()
+        else if (this.CONTROLS.RIGHT.pressed) this.player.moveForward()
         else this.player.stop()
     }
 

@@ -23,7 +23,7 @@ export class Sprite {
 
     draw(context: CanvasRenderingContext2D) {
         const scaledDimensions = this.ScaleDimensions(this.dimensions);
-        const scaledPosition = this.ScalePosition(this.position)
+        const scaledPosition = this.ScalePosition(this.position);
         if (this.image) {
             context.drawImage(this.image, scaledPosition.x, scaledPosition.y, scaledDimensions.width, scaledDimensions.height);
         } else {
@@ -44,5 +44,9 @@ export class Sprite {
             x: originalPosition.x * this.scale,
             y: originalPosition.y * this.scale,
         }
+    }
+
+    getScaledDimensions(): Dimensions {
+        return this.ScaleDimensions(this.dimensions);
     }
 }

@@ -9,7 +9,7 @@ export class Player extends Interactable {
     private maxVelocity: Position = { x: 10, y: 10 };
     private healthScore: number = 100;
     private readonly gravity = 0.5;
-    protected collisionBlocks: CollisionBlock[];
+    private collisionBlocks: CollisionBlock[];
 
     constructor(props: InteractableProps, collisionBlocks: CollisionBlock[]) {
         super(props);
@@ -64,16 +64,22 @@ export class Player extends Interactable {
             }
         }
     }
+
+    getVelocity(): Position {
+        return this.velocity
+    }
     moveHorizontally() {
         this.position.x += this.velocity.x;
     }
 
     jump(): void {
-        this.velocity.y = -10;
+        if (this.velocity.y == 0) {
+            this.velocity.y = -10;
+        }
     }
 
     stop(): void {
-
+        this.velocity.x = 0;
     }
     moveForward(): void {
         this.velocity.x = 5;
