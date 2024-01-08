@@ -27,7 +27,7 @@ export class GameManager {
     constructor() {
         this.player = new Player({
             position: { x: 0, y: 30 },
-            dimensions: { width: 30, height: 50 }
+            dimensions: { width: 45, height: 75 }
         }, ground);
         this.background = new Sprite({
             position: { x: 0, y: 0 },
@@ -84,7 +84,9 @@ export class GameManager {
 
     play(): void {
         const canvas = document.querySelector('canvas')!;
+        const controlPanel: HTMLDivElement = document.querySelector('#game-controls-wrapper')!;
         canvas.style.setProperty('display', 'block');
+        controlPanel.style.setProperty('display', 'flex')
         this.animate();
         this.setupControls();
         //hide main menu screen

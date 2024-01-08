@@ -99,7 +99,7 @@ canvas {
   width: 100vw;
   position: absolute;
   bottom: 10px;
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: end;
 }
