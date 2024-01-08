@@ -27,14 +27,14 @@ export class GameManager {
     constructor() {
         this.player = new Player({
             position: { x: 0, y: 30 },
-            dimensions: { width: 30, height: 50 },
-            imageSrc: "/idle.gif"
+            dimensions: { width: 30, height: 50 }
         }, ground);
         this.background = new Sprite({
             position: { x: 0, y: 0 },
             imageSrc: "/background-sprite.png",
             dimensions: { width: 1920, height: 360 }
         })
+        this.background.setImage("/background-sprite.png");
         const canvas = document.querySelector('canvas')!;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;

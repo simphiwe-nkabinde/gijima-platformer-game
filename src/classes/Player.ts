@@ -1,3 +1,4 @@
+import playerAnimations from "../gameObjects/spriteAnimations/player.animations";
 import { InteractableProps, Position } from "../interfaces/interfaces";
 import { CollisionBlock } from "./CollisionBlock";
 import { Interactable } from "./Interactable";
@@ -14,6 +15,8 @@ export class Player extends Interactable {
     constructor(props: InteractableProps, collisionBlocks: CollisionBlock[]) {
         super(props);
         this.collisionBlocks = collisionBlocks;
+        this.sprite?.setAnimations(playerAnimations);
+        this.sprite?.setImage("/idle.gif");
     }
 
     update(context: CanvasRenderingContext2D): void {

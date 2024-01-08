@@ -1,9 +1,8 @@
 
 
 export interface InteractableProps {
-    position: any;
+    position: Position;
     dimensions: Dimensions;
-    imageSrc: string;
 }
 
 export interface Position {
@@ -19,10 +18,10 @@ export interface SpriteAnimationProps {
 }
 
 export interface SpriteProps {
-    position: any;
+    position: Position;
     dimensions: Dimensions;
     imageSrc?: string;
-    animations?: [SpriteAnimationProps];
+    animations?: SpriteAnimationProps[];
 }
 
 export interface Dimensions {
