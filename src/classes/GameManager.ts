@@ -93,6 +93,29 @@ export class GameManager {
     }
 
     setupControls() {
+        document.querySelector('#control-run-right')?.addEventListener('touchstart', e => {
+            this.CONTROLS.RIGHT.pressed = true
+            this.CONTROLS.LEFT.pressed = false
+        })
+        document.querySelector('#control-run-right')?.addEventListener('touchend', e => {
+            this.CONTROLS.RIGHT.pressed = false
+        })
+
+        document.querySelector('#control-run-left')?.addEventListener('touchstart', e => {
+            this.CONTROLS.LEFT.pressed = true
+            this.CONTROLS.RIGHT.pressed = false
+        })
+        document.querySelector('#control-run-left')?.addEventListener('touchend', e => {
+            this.CONTROLS.LEFT.pressed = false
+        })
+
+        document.querySelector('canvas')?.addEventListener('touchstart', e => {
+            this.CONTROLS.JUMP.pressed = true
+        })
+        document.querySelector('canvas')?.addEventListener('touchend', e => {
+            this.CONTROLS.JUMP.pressed = false
+        })
+
         window.addEventListener('keydown', event => {
             switch (event.key) {
                 case 'ArrowUp':

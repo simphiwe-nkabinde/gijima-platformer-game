@@ -1,32 +1,58 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/style.css">
-    <title>Gijima</title>
-  </head>
-  <body>
-    <div id="game-company-title-container">
-      <img class="brand-logo" src="/minaluma-logo.png" alt="">
-      <img class="brand-name" src="/minaluma-name.png" alt="">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css">
+  <title>Gijima</title>
+</head>
+
+<body>
+  <div id="game-company-title-container">
+    <img class="brand-logo" src="/minaluma-logo.png" alt="">
+    <img class="brand-name" src="/minaluma-name.png" alt="">
+  </div>
+  <div id="game-title-screen">
+    <img src="/gijima-logo.png" alt="">
+    <img class="brand-logo" src="/minaluma-logo.png" alt="">
+  </div>
+  <div id="main-menu-screen">
+    <img class="ground" src="/ground.png" alt="">
+    <img class="character" src="/idle.gif" alt="">
+    <img class="game-title" src="/gijima-logo.png" alt="">
+    <div class="menu-wrapper">
+      <button id="play-btn">Play</button>
+      <button id="scoreboard-btn">Scoreboard</button>
+      <button id="quit-btn">Quit Game</button>
     </div>
-    <div id="game-title-screen">
-      <img src="/gijima-logo.png" alt="">
-      <img class="brand-logo" src="/minaluma-logo.png" alt="">
+  </div>
+  <canvas></canvas>
+  <div id="game-controls-wrapper">
+    <div class="left-panel">
+      <button id="control-run-left">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+          class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+          <path fill-rule="evenodd"
+            d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+        </svg>
+      </button>
     </div>
-    <div id="main-menu-screen">
-      <img class="ground" src="/ground.png" alt="">
-      <img class="character" src="/idle.gif" alt="">
-      <img class="game-title" src="/gijima-logo.png" alt="">
-      <div class="menu-wrapper">
-        <button id="play-btn">Play</button>
-        <button id="scoreboard-btn">Scoreboard</button>
-        <button id="quit-btn">Quit Game</button>
-      </div>
-    </div>
-    <canvas></canvas>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+    <button id="control-run-right">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708" />
+        <path fill-rule="evenodd"
+          d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708" />
+      </svg>
+    </button>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
