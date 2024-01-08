@@ -11,12 +11,12 @@ export class Player extends Interactable {
     private healthScore: number = 100;
     private readonly gravity = 0.5;
     private collisionBlocks: CollisionBlock[];
+    private lastDirection: number = 1;
 
     constructor(props: InteractableProps, collisionBlocks: CollisionBlock[]) {
         super(props);
         this.collisionBlocks = collisionBlocks;
         this.sprite?.setAnimations(playerAnimations);
-        this.sprite?.setImage("/idle.gif");
     }
 
     update(context: CanvasRenderingContext2D): void {
@@ -76,19 +76,38 @@ export class Player extends Interactable {
     }
 
     jump(): void {
+        if (this.velocity.x >= 0) {
+            this.sprite?.switchSprite('jumpForward');
+        } else {
+            this.sprite?.switchSprite('jumpBackward');
+        }
+
         if (this.velocity.y == 0) {
             this.velocity.y = -10;
         }
     }
 
     stop(): void {
+        if (this.velocity.y == 0) {
+            if (this.velocity.x > 0) this.lastDirection = 1
+            else if (this.velocity.x < 0) this.lastDirection = -1
+
+            if (this.lastDirection > 0) {
+                this.sprite?.switchSprite('idleForward');
+            } else {
+                this.sprite?.switchSprite('idleBackward');
+            }
+        }
+
         this.velocity.x = 0;
     }
     moveForward(): void {
+        if (this.velocity.y == 0) this.sprite?.switchSprite('runForward');
         this.velocity.x = 5;
         this.moveHorizontally();
     }
     moveBackward(): void {
+        if (this.velocity.y == 0) this.sprite?.switchSprite('runBackward');
         this.velocity.x = -5;
         this.moveHorizontally();
     }
