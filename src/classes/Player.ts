@@ -12,6 +12,7 @@ export class Player extends Interactable {
     private interactableObjects: InteractablesObjects;
     private points: number = 0;
     private lastDirection: number = 1;
+    private jumpCount: number = 0;
 
     constructor(props: InteractableProps, interactableObjects: InteractablesObjects) {
         super(props);
@@ -37,7 +38,7 @@ export class Player extends Interactable {
         for (let i = 0; i < this.interactableObjects.obstacles.length; i++) {
             const obstacle = this.interactableObjects.obstacles[i];
 
-            if (this.isColliding(obstacle)) {
+            if (this.CollidesWith(obstacle)) {
                 if (this.velocity.y > 0) {
                     this.velocity.y = 0;
                     this.position.y = obstacle.getPosition().y - this.dimensions.height - 0.01;
@@ -56,7 +57,7 @@ export class Player extends Interactable {
         for (let i = 0; i < this.interactableObjects.obstacles.length; i++) {
             const obstacle = this.interactableObjects.obstacles[i];
 
-            if (this.isColliding(obstacle)) {
+            if (this.CollidesWith(obstacle)) {
                 if (this.velocity.x > 0) {
                     this.velocity.x = 0;
                     this.position.x = obstacle.getPosition().x - this.dimensions.width - 0.01;
@@ -75,13 +76,11 @@ export class Player extends Interactable {
         for (let i = 0; i < this.interactableObjects.tokens.length; i++) {
             const token = this.interactableObjects.tokens[i];
 
-            if (this.isColliding(token)) {
+            if (this.CollidesWith(token)) {
                 this.points += token.getPoints();
                 token.destroy();
             }
         }
-        console.log(this.points);
-        
     }
 
     getVelocity(): Position {

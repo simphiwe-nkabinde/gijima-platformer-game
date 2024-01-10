@@ -16,7 +16,7 @@ export class Interactable {
         this.sprite?.draw(context);
     }
 
-    protected isColliding(object: Interactable): boolean {
+    protected CollidesWith(object: Interactable): boolean {
         return (
             this.position.y + this.dimensions.height >= object.position.y &&
             this.position.y <= object.position.y + object.dimensions.height &&
