@@ -29,7 +29,10 @@ export class GameManager {
         this.player = new Player({
             position: { x: 0, y: 30 },
             dimensions: { width: 45, height: 75 }
-        }, {obstacles:obstacleCourse1});
+        }, {
+            obstacles: obstacleCourse1,
+            tokens: tokens
+        });
         this.background = new Sprite({
             position: { x: 0, y: 0 },
             imageSrc: "/background-sprite.png",

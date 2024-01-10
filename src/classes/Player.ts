@@ -10,6 +10,7 @@ export class Player extends Interactable {
     private healthScore: number = 100;
     private readonly gravity = 0.5;
     private interactableObjects: InteractablesObjects;
+    private points: number = 0;
     private lastDirection: number = 1;
 
     constructor(props: InteractableProps, interactableObjects: InteractablesObjects) {
@@ -23,6 +24,7 @@ export class Player extends Interactable {
         this.reactToHorizontalCollisions();
         this.applyGravity();
         this.reactToVerticalCollisions();
+        this.reactToTokens();
     }
 
     applyGravity() {
@@ -67,6 +69,19 @@ export class Player extends Interactable {
                 }
             }
         }
+    }
+    reactToTokens() {
+        if (!this.interactableObjects.tokens?.length) return;
+        for (let i = 0; i < this.interactableObjects.tokens.length; i++) {
+            const token = this.interactableObjects.tokens[i];
+
+            if (this.isColliding(token)) {
+                this.points += token.getPoints();
+                token.destroy();
+            }
+        }
+        console.log(this.points);
+        
     }
 
     getVelocity(): Position {

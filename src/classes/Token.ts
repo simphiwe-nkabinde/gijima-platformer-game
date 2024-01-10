@@ -15,4 +15,9 @@ export class Token extends Interactable {
     getPoints(): number {
         return this.points;
     }
+
+    destroy() {
+        this.sprite =  undefined;  
+        this.points = 0;     
+    }
 }
