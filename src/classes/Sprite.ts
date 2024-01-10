@@ -5,7 +5,7 @@ export class Sprite {
     private dimensions: Dimensions;
     private image?: HTMLImageElement;
     private animations?: any = {};
-    private activeSpriteName: string = 'idleForward';
+    private activeSpriteName: string = '';
     private currentFrame: number = 0;
     private elapsedFrames: number = 0;
     protected scale: number = window.innerHeight / 360;
@@ -94,6 +94,7 @@ export class Sprite {
 
     setAnimations(props: SpriteAnimationProps[]): void {
         if (props?.length) {
+            this.activeSpriteName = props[0].name
             props?.forEach(item => {
                 this.animations[item.name] = {
                     frameRate: item.frameRate,

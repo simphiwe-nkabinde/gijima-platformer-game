@@ -1,3 +1,4 @@
+import tokenAnimations from '../gameObjects/spriteAnimations/token.animations';
 import { InteractableProps } from '../interfaces/interfaces';
 import { Interactable } from "./Interactable";
 
@@ -8,10 +9,7 @@ export class Token extends Interactable {
     constructor(props: InteractableProps, points: number) {
         super(props);
         this.points = points;
-    }
-
-    update(context: CanvasRenderingContext2D): void {
-        this.sprite?.draw(context);
+        this.sprite?.setAnimations(tokenAnimations);
     }
 
     getPoints(): number {

@@ -1,7 +1,7 @@
 import { Dimensions, InteractableProps, Position } from '../interfaces/interfaces';
 import { Sprite } from './Sprite';
 
-export abstract class Interactable {
+export class Interactable {
     protected position: any;
     protected dimensions: Dimensions;
     protected sprite?: Sprite;
@@ -12,7 +12,9 @@ export abstract class Interactable {
         this.sprite = new Sprite(props)
     }
 
-    abstract update(context: CanvasRenderingContext2D): void
+    update(context: CanvasRenderingContext2D): void {
+        this.sprite?.draw(context);
+    }
 
     protected isColliding(object: Interactable): boolean {
         return (

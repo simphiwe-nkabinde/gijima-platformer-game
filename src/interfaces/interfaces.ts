@@ -1,3 +1,5 @@
+import { Interactable } from "../classes/Interactable";
+import { Token } from "../classes/Token";
 
 
 export interface InteractableProps {
@@ -27,4 +29,9 @@ export interface SpriteProps {
 export interface Dimensions {
     width: number;
     height: number;
+}
+
+export interface InteractablesObjects {
+    obstacles?: Interactable[];
+    tokens?: Token[];
 }

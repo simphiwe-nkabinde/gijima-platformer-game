@@ -1,5 +1,6 @@
-import ground from "../gameObjects/collisionBlocks/ground";
-import { CollisionBlock } from "./CollisionBlock";
+import obstacleCourse1 from "../gameObjects/obstacles/obstacleCourse1";
+import tokens from "../gameObjects/tokens/tokens";
+import { Interactable } from "./Interactable";
 import { Player } from "./Player";
 import { Sprite } from "./Sprite";
 import { Token } from "./Token";
@@ -7,8 +8,8 @@ import { Token } from "./Token";
 export class GameManager {
 
     private player: Player;
-    private collisionBlocks: CollisionBlock[];
-    private tokens?: [Token];
+    private obstacles: Interactable[];
+    private tokens: Token[];
     private context: CanvasRenderingContext2D;
     private background: Sprite;
     private CONTROLS = {
@@ -28,7 +29,7 @@ export class GameManager {
         this.player = new Player({
             position: { x: 0, y: 30 },
             dimensions: { width: 45, height: 75 }
-        }, ground);
+        }, {obstacles:obstacleCourse1});
         this.background = new Sprite({
             position: { x: 0, y: 0 },
             imageSrc: "/background-sprite.png",
@@ -40,7 +41,8 @@ export class GameManager {
         canvas.height = window.innerHeight;
         this.context = canvas!.getContext('2d')!;
 
-        this.collisionBlocks = ground;
+        this.obstacles = obstacleCourse1;
+        this.tokens = tokens;
     }
 
     private panHorizontally() {
@@ -159,9 +161,12 @@ export class GameManager {
 
         this.context.translate(this.sceneTranslationX, 0);
         this.background.draw(this.context);
-        this.collisionBlocks.forEach(block => {
+        this.obstacles.forEach(block => {
             block.update(this.context)
         });
+        this.tokens.forEach(t => {
+            t.update(this.context)
+        })
         this.player.update(this.context);
         this.context.restore();
         this.panHorizontally()
