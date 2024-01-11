@@ -98,6 +98,45 @@ body {
             box-shadow: 0px 0px 4px 3px #0000002e;
         }
     }
+
+    #intro-modal-overlay {
+        position: absolute;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0.1);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .modal {
+            background: #192b3b;
+            color: #fff;
+            padding: .5rem;
+            border: 3px solid #9ec357;
+            width: 50%;
+            height: 70%;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px 2px #00000042;
+
+            .modal-close {
+                text-align: end;
+            }
+
+            .modal-head {
+                text-align: center;
+            }
+
+            .modal-body {
+                padding: 1rem;
+
+                ul {
+                    li {
+                        margin-bottom: .4rem;
+                    }
+                }
+            }
+        }
+    }
 }
 
 canvas {

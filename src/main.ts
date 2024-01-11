@@ -8,7 +8,7 @@ const scoreboardBtn = document.getElementById('scoreboard-btn')
 
 const gameManager: GameManager = new GameManager();
 
-gameManager.play();
+gameManager.start();
 
 playBtn?.addEventListener('click', () => {
   gameManager.play();

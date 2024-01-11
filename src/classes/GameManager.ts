@@ -2,6 +2,7 @@ import obstacleCourse1 from "../gameObjects/obstacles/obstacleCourse1";
 import tokens from "../gameObjects/tokens/tokens";
 import { Interactable } from "./Interactable";
 import { Player } from "./Player";
+import { Sound } from "./Sound";
 import { Sprite } from "./Sprite";
 import { Token } from "./Token";
 
@@ -12,6 +13,7 @@ export class GameManager {
     private tokens: Token[];
     private context: CanvasRenderingContext2D;
     private background: Sprite;
+    private Sounds: any = {};
     private CONTROLS = {
         JUMP: {
             pressed: false
@@ -46,6 +48,10 @@ export class GameManager {
 
         this.obstacles = obstacleCourse1;
         this.tokens = tokens;
+
+        //Sounds
+        this.Sounds.mainMenu = new Sound('bg-sound-1.mp3');
+        this.Sounds.gameplay = new Sound('bg-sound-2.mp3');
     }
 
     private panHorizontally() {
@@ -70,7 +76,21 @@ export class GameManager {
     start(): void {
         //show game company title
         const gameCompanyTitleContainer = document.getElementById('game-company-title-container');
-        gameCompanyTitleContainer?.style.setProperty('display', 'flex');
+        // gameCompanyTitleContainer?.style.setProperty('display', 'flex');
+
+        //show main menu screen
+        const mainMenuScreen = document.getElementById('main-menu-screen');
+        mainMenuScreen?.style.setProperty('display', 'block');
+
+        const modalCloseBtn: HTMLDivElement = document.querySelector('#main-modal-close')!;
+        modalCloseBtn.onclick = () => {
+            document.body.requestFullscreen().then(val => console.log(val));
+            document.querySelector('#intro-modal-overlay')?.remove();
+
+            //play background music
+            this.Sounds.mainMenu.play();
+        }
+        return
         setTimeout(() => {
             gameCompanyTitleContainer?.style.setProperty('display', 'none');
 
@@ -97,6 +117,11 @@ export class GameManager {
         //hide main menu screen
         const mainMenuScreen = document.getElementById('main-menu-screen');
         mainMenuScreen?.style.setProperty('display', 'none');
+
+        //play background music
+        this.Sounds.mainMenu.stop();
+        this.Sounds.gameplay.play();
+
     }
 
     setupControls() {
