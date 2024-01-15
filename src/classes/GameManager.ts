@@ -207,12 +207,14 @@ export class GameManager {
             lives: this.player.getLives()
         })
 
+        this.player.moveForward()
+
         //controls
         if (this.CONTROLS.JUMP.pressed) this.player.jump();
 
-        if (this.CONTROLS.LEFT.pressed) this.player.moveBackward()
-        else if (this.CONTROLS.RIGHT.pressed) this.player.moveForward()
-        else this.player.stop()
+        // if (this.CONTROLS.LEFT.pressed) this.player.moveBackward()
+        // else if (this.CONTROLS.RIGHT.pressed) this.player.moveForward()
+        // else this.player.stop()
     }
 
     showScoreBoard(): void {
