@@ -7,10 +7,10 @@ export class Player extends Interactable {
     private acceleration: Position = { x: 0, y: 0 };
     private velocity: Position = { x: 0, y: 0 };
     private maxVelocity: Position = { x: 10, y: 10 };
-    private healthScore: number = 100;
+    private lives: number = 1;
     private readonly gravity = 0.5;
     private interactableObjects: InteractablesObjects;
-    private points: number = 0;
+    private tokens: number = 0;
     private lastDirection: number = 1;
     private jumpCount: number = 0;
 
@@ -77,7 +77,7 @@ export class Player extends Interactable {
             const token = this.interactableObjects.tokens[i];
 
             if (this.CollidesWith(token)) {
-                this.points += token.getPoints();
+                this.tokens += token.getPoints();
                 token.destroy();
             }
         }
@@ -128,5 +128,11 @@ export class Player extends Interactable {
     }
     takeDamage(amount: number): void {
 
+    }
+    getTokens(): number {
+        return this.tokens;
+    }
+    getLives() : number {
+        return this.lives
     }
 }

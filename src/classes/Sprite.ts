@@ -4,6 +4,8 @@ export class Sprite {
     private position: Position;
     private dimensions: Dimensions;
     private image?: HTMLImageElement;
+    private text?: string;
+    private textFillstyle?: string;
     private animations?: any = {};
     private activeSpriteName: string = '';
     private currentFrame: number = 0;
@@ -13,7 +15,7 @@ export class Sprite {
 
     constructor(props: SpriteProps) {
         this.position = props.position;
-        this.dimensions = props.dimensions;
+        this.dimensions = props.dimensions!;
     };
 
     switchSprite(name: string): void {
@@ -23,7 +25,7 @@ export class Sprite {
     draw(context: CanvasRenderingContext2D) {
         const scaledDimensions = this.getScaledDimensions();
         const scaledPosition = this.getScaledPosition();
-        if (this.image) {
+        if (this.image && scaledDimensions) {
             context.drawImage(
                 this.image,
                 scaledPosition.x,
@@ -31,7 +33,7 @@ export class Sprite {
                 scaledDimensions.width,
                 scaledDimensions.height
             );
-        } else if (this.animations && Object.keys(this.animations).length) {
+        } else if (this.animations && Object.keys(this.animations).length && scaledDimensions) {
             // render animations
             const activeSprite = this.animations[this.activeSpriteName];
             const frameWidth = activeSprite.image.width / activeSprite.frameRate;
@@ -51,14 +53,26 @@ export class Sprite {
             this.updateFrames(activeSprite)
 
         } else {
-            context.fillStyle = '#ff000000';
-            context.fillRect(
-                scaledPosition.x,
-                scaledPosition.y,
-                scaledDimensions.width,
-                scaledDimensions.height
-            );
+            if (scaledDimensions) {
+                context.fillStyle = '#ff000000';
+                context.fillRect(
+                    scaledPosition.x,
+                    scaledPosition.y,
+                    scaledDimensions.width,
+                    scaledDimensions.height
+                );
+            }
         }
+
+        //fill Text
+        this.textFillstyle ? context.fillStyle = this.textFillstyle : '';
+        if (this.text?.length) {
+            context.fillText(
+                this.text,
+                scaledPosition.x,
+                scaledPosition.y);
+        }
+
     }
     updateFrames(animation: any) {
         this.elapsedFrames++;
@@ -68,7 +82,8 @@ export class Sprite {
         }
     }
 
-    getScaledDimensions(): Dimensions {
+    getScaledDimensions(): Dimensions | null {
+        if (!this.dimensions) return null
         return {
             width: this.dimensions.width * this.scale,
             height: this.dimensions.height * this.scale,
@@ -90,6 +105,12 @@ export class Sprite {
                 this.isActiveImageLoaded = true;
             }
         }
+    }
+
+    setText(props: { text?: string, fillStyle?: string, position?: Position }) {
+        props.text ? this.text = props.text : '';
+        props.fillStyle ? this.textFillstyle = props.fillStyle : '';
+        props.position ? this.position = props.position : '';
     }
 
     setAnimations(props: SpriteAnimationProps[]): void {

@@ -1,3 +1,4 @@
+import { PlayerStatusPanel } from './PlayerStatusPanel';
 import obstacleCourse1 from "../gameObjects/obstacles/obstacleCourse1";
 import tokens from "../gameObjects/tokens/tokens";
 import { Interactable } from "./Interactable";
@@ -12,6 +13,7 @@ export class GameManager {
     private obstacles: Interactable[];
     private tokens: Token[];
     private context: CanvasRenderingContext2D;
+    private playerStatusPanel: PlayerStatusPanel;
     private background: Sprite;
     private Sounds: any = {};
     private CONTROLS = {
@@ -37,7 +39,6 @@ export class GameManager {
         });
         this.background = new Sprite({
             position: { x: 0, y: 0 },
-            imageSrc: "/background-sprite.png",
             dimensions: { width: 1920, height: 360 }
         })
         this.background.setImage("/background-sprite.png");
@@ -52,6 +53,8 @@ export class GameManager {
         //Sounds
         this.Sounds.mainMenu = new Sound('bg-sound-1.mp3');
         this.Sounds.gameplay = new Sound('bg-sound-2.mp3');
+
+        this.playerStatusPanel = new PlayerStatusPanel(this.context)
     }
 
     private panHorizontally() {
@@ -65,7 +68,7 @@ export class GameManager {
 
         if (playerXToInnerwidthDistance < (window.innerWidth / 2)) {
             // to right: decrement
-            if (this.background.getScaledDimensions().width + this.sceneTranslationX > window.innerWidth)
+            if (this.background.getScaledDimensions()!.width + this.sceneTranslationX > window.innerWidth)
                 this.sceneTranslationX -= playerVelocity.x;
         } else if (playerXToInnerwidthDistance > (window.innerWidth / 2) && this.sceneTranslationX < 0) {
             // to left: incrementx
@@ -82,8 +85,7 @@ export class GameManager {
         const mainMenuScreen = document.getElementById('main-menu-screen');
         mainMenuScreen?.style.setProperty('display', 'block');
 
-        const modalCloseBtn: HTMLDivElement = document.querySelector('#main-modal-close')!;
-        modalCloseBtn.onclick = () => {
+        document.body.onclick = () => {
             document.body.requestFullscreen().then(val => console.log(val));
             document.querySelector('#intro-modal-overlay')?.remove();
 
@@ -197,7 +199,14 @@ export class GameManager {
         })
         this.player.update(this.context);
         this.context.restore();
-        this.panHorizontally()
+        this.panHorizontally();
+
+        this.playerStatusPanel.update({
+            tokens: this.player.getTokens(),
+            distance: Math.round(this.sceneTranslationX / -40),
+            lives: this.player.getLives()
+        })
+
         //controls
         if (this.CONTROLS.JUMP.pressed) this.player.jump();
 

@@ -21,9 +21,7 @@ export interface SpriteAnimationProps {
 
 export interface SpriteProps {
     position: Position;
-    dimensions: Dimensions;
-    imageSrc?: string;
-    animations?: SpriteAnimationProps[];
+    dimensions?: Dimensions;
 }
 
 export interface Dimensions {
@@ -34,4 +32,10 @@ export interface Dimensions {
 export interface InteractablesObjects {
     obstacles?: Interactable[];
     tokens?: Token[];
+}
+
+export interface TextProps {
+    text?: string;  
+    position?: Position;
+    fillStyle?: string;
 }

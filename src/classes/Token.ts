@@ -4,11 +4,10 @@ import { Interactable } from "./Interactable";
 
 export class Token extends Interactable {
 
-    private points: number;
+    private points: number = 1;
 
-    constructor(props: InteractableProps, points: number) {
+    constructor(props: InteractableProps) {
         super(props);
-        this.points = points;
         this.sprite?.setAnimations(tokenAnimations);
     }
 
