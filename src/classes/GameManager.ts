@@ -1,11 +1,13 @@
 import { PlayerStatusPanel } from './PlayerStatusPanel';
-import obstacleCourse1 from "../gameObjects/obstacles/obstacleCourse1";
-import tokens from "../gameObjects/tokens/tokens";
 import { Interactable } from "./Interactable";
 import { Player } from "./Player";
 import { Sound } from "./Sound";
 import { Sprite } from "./Sprite";
 import { Token } from "./Token";
+import getGroundSpites from '../utilities/getGroundSpites';
+import getLedgeSprites from '../utilities/getLedgeSprites';
+import getTokenSprites from '../utilities/getTokenSprites';
+import getBackgroundSprites from '../utilities/getBackgroundSprites';
 
 export class GameManager {
 
@@ -14,7 +16,7 @@ export class GameManager {
     private tokens: Token[];
     private context: CanvasRenderingContext2D;
     private playerStatusPanel: PlayerStatusPanel;
-    private background: Sprite;
+    private parallaxBackground: Sprite[][]
     private Sounds: any = {};
     private CONTROLS = {
         JUMP: {
@@ -30,25 +32,24 @@ export class GameManager {
     sceneTranslationX: number = 0;
 
     constructor() {
+        this.obstacles = [...getGroundSpites(), ...getLedgeSprites()];
+
+        this.tokens = getTokenSprites();
+
         this.player = new Player({
             position: { x: 0, y: 30 },
-            dimensions: { width: 45, height: 75 }
+            dimensions: { width: 35, height: 60 }
         }, {
-            obstacles: obstacleCourse1,
-            tokens: tokens
+            obstacles: this.obstacles,
+            tokens: this.tokens
         });
-        this.background = new Sprite({
-            position: { x: 0, y: 0 },
-            dimensions: { width: 1920, height: 360 }
-        })
-        this.background.setImage("/background-sprite.png");
+
+        this.parallaxBackground = getBackgroundSprites();
         const canvas = document.querySelector('canvas')!;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         this.context = canvas!.getContext('2d')!;
 
-        this.obstacles = obstacleCourse1;
-        this.tokens = tokens;
 
         //Sounds
         this.Sounds.mainMenu = new Sound('bg-sound-1.mp3');
@@ -68,7 +69,7 @@ export class GameManager {
 
         if (playerXToInnerwidthDistance < (window.innerWidth / 2)) {
             // to right: decrement
-            if (this.background.getScaledDimensions()!.width + this.sceneTranslationX > window.innerWidth)
+            if (this.obstacles[this.obstacles.length - 1].getPosition().x + this.sceneTranslationX > window.innerWidth)
                 this.sceneTranslationX -= playerVelocity.x;
         } else if (playerXToInnerwidthDistance > (window.innerWidth / 2) && this.sceneTranslationX < 0) {
             // to left: incrementx
@@ -111,9 +112,7 @@ export class GameManager {
 
     play(): void {
         const canvas = document.querySelector('canvas')!;
-        const controlPanel: HTMLDivElement = document.querySelector('#game-controls-wrapper')!;
         canvas.style.setProperty('display', 'block');
-        controlPanel.style.setProperty('display', 'flex')
         this.animate();
         this.setupControls();
         //hide main menu screen
@@ -127,22 +126,6 @@ export class GameManager {
     }
 
     setupControls() {
-        document.querySelector('#control-run-right')?.addEventListener('touchstart', e => {
-            this.CONTROLS.RIGHT.pressed = true
-            this.CONTROLS.LEFT.pressed = false
-        })
-        document.querySelector('#control-run-right')?.addEventListener('touchend', e => {
-            this.CONTROLS.RIGHT.pressed = false
-        })
-
-        document.querySelector('#control-run-left')?.addEventListener('touchstart', e => {
-            this.CONTROLS.LEFT.pressed = true
-            this.CONTROLS.RIGHT.pressed = false
-        })
-        document.querySelector('#control-run-left')?.addEventListener('touchend', e => {
-            this.CONTROLS.LEFT.pressed = false
-        })
-
         document.querySelector('canvas')?.addEventListener('touchstart', e => {
             this.CONTROLS.JUMP.pressed = true
         })
@@ -190,7 +173,11 @@ export class GameManager {
         this.context.save();
 
         this.context.translate(this.sceneTranslationX, 0);
-        this.background.draw(this.context);
+        this.parallaxBackground.forEach((level, levelIndex) => {
+            level.forEach(item =>
+                item.draw(this.context, this.sceneTranslationX * (levelIndex / 20))
+            )
+        });
         this.obstacles.forEach(block => {
             block.update(this.context)
         });
