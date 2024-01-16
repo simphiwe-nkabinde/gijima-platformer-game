@@ -10,6 +10,9 @@ export class Interactable {
         this.position = props.position;
         this.dimensions = props.dimensions;
         this.sprite = new Sprite(props)
+        if (props.spriteImageSrc?.length) {
+            this.sprite.setImage(props.spriteImageSrc);
+        }
     }
 
     update(context: CanvasRenderingContext2D): void {

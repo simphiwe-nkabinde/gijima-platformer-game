@@ -5,6 +5,7 @@ import { Token } from "../classes/Token";
 export interface InteractableProps {
     position: Position;
     dimensions: Dimensions;
+    spriteImageSrc?: string
 }
 
 export interface Position {

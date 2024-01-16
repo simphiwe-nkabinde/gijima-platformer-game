@@ -22,13 +22,13 @@ export class Sprite {
         this.activeSpriteName = name;
     }
 
-    draw(context: CanvasRenderingContext2D) {
+    draw(context: CanvasRenderingContext2D, offsetX = 0) {
         const scaledDimensions = this.getScaledDimensions();
         const scaledPosition = this.getScaledPosition();
         if (this.image && scaledDimensions) {
             context.drawImage(
                 this.image,
-                scaledPosition.x,
+                scaledPosition.x + offsetX,
                 scaledPosition.y,
                 scaledDimensions.width,
                 scaledDimensions.height
